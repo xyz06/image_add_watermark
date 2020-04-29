@@ -23,7 +23,7 @@ def no_indent(w, h, text, text_width, img_width, img_draw, font,  color):
 
 
 def image_add_text(file, text, color='white'):
-    font = ImageFont.truetype('arial.ttf', 40)
+    font = ImageFont.truetype('./arial.ttf', 40)
     img = Image.open(file).convert('RGBA')
     text_img = Image.new('RGBA', img.size, (0, 0, 0, 0))
     img_draw = ImageDraw.Draw(text_img)
