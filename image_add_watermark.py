@@ -1,5 +1,7 @@
 import argparse
 import os
+import time
+
 from PIL import Image, ImageDraw, ImageFont
 
 
@@ -23,6 +25,8 @@ def no_indent(w, h, text, text_width, img_width, img_draw, font,  color):
 
 
 def image_add_text(file, text, color='white'):
+    p = file.rindex(".")
+    ext = file[p:]
     font = ImageFont.truetype('./arial.ttf', 40)
     img = Image.open(file).convert('RGBA')
     text_img = Image.new('RGBA', img.size, (0, 0, 0, 0))
@@ -49,9 +53,14 @@ def image_add_text(file, text, color='white'):
                 no_indent(0, h, text, text_width, img_width, img_draw, font, colors[color])
         h = h + text_height
 
-    new_img = Image.alpha_composite(img, text_img)
-    new_img.show()
-    # new_img.save('new.png')
+    new_img = Image.alpha_composite(img, text_img).convert('RGB')
+    # new_img.show()
+    filename = str(time.time()) + ext
+    dir_path = os.path.abspath(os.path.dirname(__file__) + "/static/image_watermark")
+    if not os.path.exists(dir_path):
+        os.mkdir(dir_path)
+    new_img.save(dir_path +"\\" + filename)
+    return filename
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
