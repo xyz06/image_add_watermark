@@ -6,35 +6,29 @@ import urllib.parse
 
 app = flask.Flask(__name__)
 
-def getFile(fileName):
-    data = b""
-    if os.path.exists(fileName):
-        fobj = open(fileName, "rb")
-        data = fobj.read()
-        fobj.close()
-    return data
-
-
 @app.route("/")
 def index():
-    return getFile("index.html")
+    return flask.render_template("index.html")
 
 
-@app.route("/upload",methods=['POST'])
+@app.route("/upload",methods=["POST"])
 def upload():
-    img = flask.request.files.get('fileName')
-    text = flask.request.form.get('text')
+    img = flask.request.files.get("fileName")
+    text = flask.request.form.get("text")
+    color = flask.request.form.get("color")
     if not img or not text:
         return flask.render_template("alert.html",alert="No img or no text")
+    if not color or color not in ['white', 'blue', 'red', 'orange', 'yellow', 'green', 'black']:
+        color = "white"
 
     dir_path = os.path.abspath(os.path.dirname(__file__)+"/static/image")
     if not os.path.exists(dir_path):
         os.mkdir(dir_path)
     img_path = dir_path +"\\"+ img.filename
     img.save(img_path)
-    filename = image_add_watermark.image_add_text(img_path,text)
+    filename = image_add_watermark.image_add_text(img_path,text,color)
 
-    return flask.render_template("download.html",img_name= 'image_watermark/'+filename)
+    return flask.render_template("download.html",img_name="image_watermark/"+filename)
 
 @app.route("/download")
 def download():
@@ -44,7 +38,7 @@ def download():
         print(dir_path)
         return flask.send_from_directory(dir_path, img, as_attachment=True)
     else:
-        return "No image"
+        return flask.render_template("alert.html", "No image")
 
 
 if __name__=="__main__":

@@ -1,8 +1,8 @@
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-<!--    <link href="{{url_for('static',filename='css/main.css')}}" type="text/css" rel="stylesheet" />-->
-    <link href="./static/css/main.css" type="text/css" rel="stylesheet" />
+    <link href="{{ url_for('static',filename ='css/main.css') }}" type="text/css" rel="stylesheet" />
     <title>Title</title>
 </head>
 
@@ -10,7 +10,7 @@
 <div class="box">
     <h1 align="center">IMAGE ADD WATERMARK</h1>
     <div class="box_form" >
-        <form action="http://127.0.0.1:5000/upload" method="post" enctype="multipart/form-data">
+        <form action="/upload" method="post" enctype="multipart/form-data">
             <div class="main">
                 <span>
                     <span class="word">image:</span>
@@ -21,6 +21,7 @@
                 </span>
                 </br>
                 <span class="word">text:</span><input name="text" type="text" size="60"></br>
+                <span class="word">color:</span><input name="color"  type="text" size="58" placeholder="chocie one color [white, blue, red, orange, yellow, green, black]"></br>
             </div>
             <div class="submit">
                 <input type="submit" value="submit" class="input"  align="center"/>

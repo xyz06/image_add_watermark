@@ -66,7 +66,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--file", type=str, required=True)
     parser.add_argument("--text", type=str, required=True)
-    parser.add_argument("--color", type=str, default='white', choices=['white', 'blue', 'red', 'orange', 'yellow', 'green'],help="chocie one color [white, blue, red, orange, yellow, green] ")
+    parser.add_argument("--color", type=str, default='white', choices=['white', 'blue', 'red', 'orange', 'yellow', 'green', 'black'], help="chocie one color [white, blue, red, orange, yellow, green, black] ")
     args = parser.parse_args()
     try:
         if os.path.exists(args.file):
