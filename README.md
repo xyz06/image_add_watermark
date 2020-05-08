@@ -3,6 +3,7 @@
 
 ###下载
 
+
 在命令窗口(Windows 使用 win+R 调出 cmd 运行框)使用以下命令，下载
 
     C:\Users\Administrator>cd e:
@@ -12,6 +13,7 @@
 
 ##
 ###运行
+
 
 进入image_add_watermark文件夹，运行server_image.py文件启动服务
 
@@ -23,6 +25,7 @@
 
 ##
 ###使用
+
 
 浏览器输入[http://127.0.0.1:5000/](http://127.0.0.1:5000),显示主页
 
