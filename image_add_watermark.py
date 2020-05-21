@@ -56,7 +56,7 @@ def image_add_text(file, text, color='white'):
     new_img = Image.alpha_composite(img, text_img).convert('RGB')
     # new_img.show()
     filename = str(time.time()) + ext
-    dir_path = os.path.abspath(os.path.dirname(__file__) + "/static/image_watermark")
+    dir_path = os.path.dirname(os.path.abspath(__file__)) + "/static/image_watermark"
     if not os.path.exists(dir_path):
         os.mkdir(dir_path)
     new_img.save(dir_path +"\\" + filename)
