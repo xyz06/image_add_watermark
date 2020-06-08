@@ -5,6 +5,7 @@ import time
 from PIL import Image, ImageDraw, ImageFont
 
 
+
 def indent(img_width, h, text, text_width,  img_draw, font,color):
     w = img_width
     while 1:
@@ -55,11 +56,11 @@ def image_add_text(file, text, color='white'):
 
     new_img = Image.alpha_composite(img, text_img).convert('RGB')
     # new_img.show()
-    filename = str(time.time()) + ext
-    dir_path = os.path.dirname(os.path.abspath(__file__)) + "/static/image_watermark"
+    filename = str(int(time.time())) + ext
+    dir_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),"static/image_watermark")
     if not os.path.exists(dir_path):
         os.mkdir(dir_path)
-    new_img.save(dir_path +"\\" + filename)
+    new_img.save(os.path.join(dir_path,filename))
     return filename
 
 if __name__ == "__main__":

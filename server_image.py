@@ -5,7 +5,7 @@ import urllib.parse
 import check_filetype
 
 app = flask.Flask(__name__)
-
+base_dir = os.path.dirname(os.path.abspath(__file__))
 
 @app.route("/")
 def index():
@@ -21,11 +21,11 @@ def upload():
         return flask.render_template("alert.html", alert="No image or no text")
     if not color or color not in ['white', 'blue', 'red', 'orange', 'yellow', 'green', 'black']:
         color = "white"
-    dir_path = os.path.dirname(os.path.abspath(__file__)) + "/static/upload"
+    dir_path = os.path.join(base_dir,"static/upload")
     # print(dir_path)
     if not os.path.exists(dir_path):
         os.mkdir(dir_path)
-    img_path = dir_path + "\\" + img.filename
+    img_path = os.path.join(dir_path,img.filename)
     img.save(img_path)
     if check_filetype.file_type(img_path) == "unknown":
         return flask.render_template("alert.html", alert="The image is not jpeg or png")
@@ -38,7 +38,7 @@ def upload():
 def download():
     if "img" in flask.request.values:
         img = urllib.parse.quote(flask.request.values.get("img"))
-        dir_path = os.path.dirname(os.path.abspath(__file__)) + "/static/"
+        dir_path = os.path.join(base_dir,"static/")
         # print(dir_path)
         return flask.send_from_directory(dir_path, img, as_attachment=True)
     else:
